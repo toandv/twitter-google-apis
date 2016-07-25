@@ -1,6 +1,7 @@
 package io.github.toandv.twitter;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import twitter4j.AsyncTwitter;
 import twitter4j.Query;
@@ -12,8 +13,10 @@ import twitter4j.TwitterListener;
 import twitter4j.TwitterMethod;
 
 public class AsyncSearchTweets {
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws Exception {
 		AsyncTwitter asyncTwitter = Twitters.getAsyncAppOnlyClient();
+
+		CountDownLatch latch = new CountDownLatch(1);
 
 		TwitterListener listener = new TwitterAdapter() {
 			@Override
@@ -23,6 +26,8 @@ public class AsyncSearchTweets {
 					System.out.println(tweet.getId());
 					System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
 				}
+				latch.countDown();
+				System.out.println("Done");
 			}
 
 			@Override
@@ -37,6 +42,6 @@ public class AsyncSearchTweets {
 		};
 		asyncTwitter.addListener(listener);
 		asyncTwitter.search(new Query("java"));
-		Thread.sleep(1000000);
+		latch.await();
 	}
 }
