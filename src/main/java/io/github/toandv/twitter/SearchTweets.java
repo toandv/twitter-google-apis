@@ -7,8 +7,6 @@ import twitter4j.QueryResult;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * Created by toan on 7/15/16.
@@ -16,9 +14,7 @@ import twitter4j.conf.ConfigurationBuilder;
 public class SearchTweets {
 	public static void main(String[] args) {
 
-		ConfigurationBuilder cb = new ConfigurationBuilder().setDebugEnabled(true);
-
-		Twitter twitter = new TwitterFactory(cb.build()).getInstance();
+		Twitter twitter = Twitters.getAppOnlyClient();
 		try {
 			Query query = new Query("functional programming java 8");
 			query.setSince("2016-07-01");
