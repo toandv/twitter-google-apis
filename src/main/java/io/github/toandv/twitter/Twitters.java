@@ -19,7 +19,8 @@ public class Twitters {
 	static Configuration userOnlyConf = new ConfigurationBuilder().setDebugEnabled(true)
 			.setOAuthConsumerKey(TWITTER_CONSUMER_KEY).setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET)
 			.setOAuthAccessToken("448032857-zAZUC7C3RYxSGtmxkiaTqdxTbysAyPPfkN7FdAWf")
-			.setOAuthAccessTokenSecret("Lq7Oxt7XFGR7hiJd81WWcSzzkwmWBN8uZpLptrTdiQJrX").build();
+			.setOAuthAccessTokenSecret("Lq7Oxt7XFGR7hiJd81WWcSzzkwmWBN8uZpLptrTdiQJrX")
+			.build();
 
 	static Twitter userOnlyClient = new TwitterFactory(userOnlyConf).getInstance();
 
